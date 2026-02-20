@@ -21,8 +21,3 @@ Proyecto aún en desarrollo.
 - npm (10.9.3)
 - Vue.js (3.5.26)
 - TailWind (3.4.19)
-
-
-## Notas extra para el trabajo
-
-- Para el entorno virtual siempre utilizar *"env_pedidoscd"* para que pueda ser aplicado en el *.gitignore*
