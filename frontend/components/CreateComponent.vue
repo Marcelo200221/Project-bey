@@ -11,6 +11,8 @@
     const tipe = ref([])
     const image = ref()
     const color = ref("")
+    const sistema = ref("")
+    const season = ref("")
 
     const nombres = ref("")
     const descripciones = ref("")
@@ -81,6 +83,8 @@
                 formData.append('tip', tip.value);
                 formData.append('tipe', tipe.value);
                 formData.append('color', color.value)
+                formData.append('season', season.value);
+                formData.append('sistem', sistema.value);
                 if (image.value) {
                     formData.append('image', image.value);
                 }
@@ -180,6 +184,20 @@
                         :value="t.id">
                         {{ t.nombre }}
                     </option>
+                </select>
+                <h3 class="text-sm">Temporada</h3>
+                <select class="bg-gray-200 w-[300px]" v-model="season">
+                    <option class="text-gray-200" disabled value="">Seleccionar la temporada</option>
+                    <option value="Metal Fusion">Metal Fusion</option>
+                    <option value="Metal Masters">Metal Masters</option>
+                    <option value="Metal Fury">Metal Fury</option>
+                </select>
+                <h3 class="text-sm">Sistema</h3>
+                <select class="bg-gray-200 w-[300px]" v-model="sistema">
+                    <option disabled value="">Seleccionar el sistema del beyblade</option>
+                    <option value="Pre-Hybrid">Sistema Pre-Hibrido</option>
+                    <option value="Hybrid">Sistema Hibrido</option>
+                    <option value="4D">Sitema 4D</option>
                 </select>
                 <h3 class="text-sm">Color Predominante</h3>
                 <input class="bg-gray-200 w-[300px]" v-model="color" type="text" placeholder="Ingresa color en ingles o codigo de color" >

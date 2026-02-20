@@ -21,7 +21,9 @@ def crear_beyblade(request):
         spin_track = data.get("track")
         tip = data.get("tip")
         tipe = data.get("tipe")
-        color = request.POST.get("color")
+        color = data.get("color")
+        season = data.get("season")
+        sistem = data.get("sistem")
         image = None
     else:
         # Handle form data (for file uploads)
@@ -33,10 +35,12 @@ def crear_beyblade(request):
         tip = request.POST.get("tip")
         tipe = request.POST.get("tipe")
         color = request.POST.get("color")
+        season = request.POST.get("season")
+        sistem = request.POST.get("sistem")
         image = request.FILES.get("image") if 'image' in request.FILES else None
 
     # Validate required fields
-    if not all([nombre, descripcion, fusion_wheel, clear_wheel, spin_track, tip, tipe, color]):
+    if not all([nombre, descripcion, fusion_wheel, clear_wheel, spin_track, tip, tipe, color, season, sistem]):
         return Response(
             {"error": "Faltan campos requeridos"},
             status=status.HTTP_400_BAD_REQUEST
@@ -58,7 +62,9 @@ def crear_beyblade(request):
             tip=tipBey, 
             tipe=tipeBey, 
             photo=image,
-            color=color
+            color=color,
+            season=season,
+            sistem=sistem
         )
 
         return Response(
@@ -224,7 +230,12 @@ def cargar_tipe(request):
 
 @api_view(["GET"])
 def cargar_beyblades(request):
-    bey = Beyblade.objects.all()
+    seleccion = request.query_params.get("select")
+    
+    if seleccion:
+        bey = Beyblade.objects.filter(season__icontains = seleccion)
+    else:
+        bey = Beyblade.objects.all()
 
     data = []
 
@@ -233,7 +244,8 @@ def cargar_beyblades(request):
             "id": i.id,
             "nombre": i.nombre,
             "photo": i.photo.url if i.photo else None,
-            "color": i.color
+            "color": i.color,
+            "season": i.season
         }
         data.append(lista)
         

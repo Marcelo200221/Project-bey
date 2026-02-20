@@ -48,6 +48,8 @@ class Beyblade(models.Model):
     tipe = models.ForeignKey(Tipe, on_delete=models.CASCADE, related_name="beyblade")
     color = models.CharField(default="", max_length=100, null=False)
     photo = models.ImageField(upload_to="media/", blank=True, null=True)
+    sistem = models.CharField(default="", max_length=200, null=False)
+    season = models.CharField(default="", max_length=200, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

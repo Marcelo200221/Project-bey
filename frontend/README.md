@@ -1,38 +1,19 @@
-# frontend
+# Frontend de Proyecto-Bey
 
-This template should help get you started developing with Vue 3 in Vite.
+Frontend desarrollado en Vue.js para la interfaz de usuario y consumo de la API.
 
-## Recommended IDE Setup
+## Librerías y tecnologías utilizadas
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+1. Vue.js – Framework principal para la construcción de la interfaz.
 
-## Recommended Browser Setup
+2. Vue Router – Manejo de rutas en la aplicación.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+3. Vite – Herramienta de desarrollo y bundler.
 
-## Customize configuration
+4. Tailwind CSS – Framework de estilos.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+5. Axios – Cliente HTTP para la comunicación con el backend.
 
-## Project Setup
+6. PostCSS y Autoprefixer – Procesamiento y compatibilidad de estilos.
 
-```sh
-npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
