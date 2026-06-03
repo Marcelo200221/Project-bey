@@ -19,7 +19,7 @@ const logout = async() => {
     <header class="header">
         <div>
             <div>
-                <router-link class="inline-block text-white font-bold text-[20px] rounded-[5px] bg-gray-700 no-underline transition-all duration-300 ease-in-out px-2 py-1 shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-shadow hover:scale-110" :to="{name: 'Home', params:{season: 'Home'}}">
+                <router-link class="inline-block text-white font-bold text-[20px] rounded-[5px] bg-gray-700 no-underline transition-all duration-300 ease-in-out px-2 py-1 shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-shadow hover:scale-110" :to="{name: 'Home'}">
                     <img class="w-24 h-auto" src="/img/BeyStory2.png" alt="">
                 </router-link>
             </div>

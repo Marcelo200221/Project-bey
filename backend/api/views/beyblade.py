@@ -81,71 +81,96 @@ def crear_beyblade(request):
             {"error": f"Error al crear beyblade: {str(e)}"},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
-
+    
 @api_view(["POST"])
-def crear_fusion(request):
+def crear_pieza(request):
     data = json.loads(request.body)
+    tipo_pieza = data.get("tipo")
     nombre = data.get("nombre")
     descripcion = data.get("descripcion")
 
-    FusionWheel.objects.create(nombre = nombre, descripcion=descripcion)
+    if not tipo_pieza or not nombre or not descripcion:
+        return Response(
+            {"error", "Falta uno o más valores necesarios"},
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
-    return Response(
-        {"success": "Se ha creado la rueda de fusión exitosamente"},
-        status=status.HTTP_201_CREATED
-    )
+    try:
 
-@api_view(["POST"])
-def crear_clear(request):
-    data = json.loads(request.body)
-    nombre = data.get("nombre")
-    descripcion = data.get("descripcion")
+        if tipo_pieza == "fusion":
+            FusionWheel.objects.create(nombre = nombre, descripcion=descripcion)
 
-    ClearWheel.objects.create(nombre = nombre, descripcion=descripcion)
+        elif tipo_pieza == "clear":
+            ClearWheel.objects.create(nombre = nombre, descripcion=descripcion)
 
-    return Response(
-        {"success": "Se ha creado la rueda de energía exitosamente"},
-        status=status.HTTP_201_CREATED
-    )
+            return Response(
+                {"success": "Se ha creado la rueda de energía exitosamente"},
+                status=status.HTTP_201_CREATED
+            )
+        elif tipo_pieza == "track":
+            SpinTrack.objects.create(nombre = nombre, descripcion=descripcion)
 
-@api_view(["POST"])
-def crear_track(request):
-    data = json.loads(request.body)
-    nombre = data.get("nombre")
-    descripcion = data.get("descripcion")
+        elif tipo_pieza == "tip":
+            Tip.objects.create(nombre = nombre, descripcion=descripcion)
 
-    SpinTrack.objects.create(nombre = nombre, descripcion=descripcion)
+        elif tipo_pieza == "tipe":
+            Tipe.objects.create(nombre = nombre, descripcion=descripcion)
 
-    return Response(
-        {"success": "Se ha creado el eje de rotación exitosamente"},
-        status=status.HTTP_201_CREATED
-    )
+        else:
+            return Response(
+                {"error": "No se ha especificado el valor de pieza"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-@api_view(["POST"])
-def crear_tip(request):
-    data = json.loads(request.body)
-    nombre = data.get("nombre")
-    descripcion = data.get("descripcion")
+        return Response(
+            {"success": "Se ha creado la pieza con exito"},
+            status=status.HTTP_201_CREATED
+        )
+    except Exception as e:
+         return Response(
+             {"error": f"Se produjo un error al validar los datos enviados: {e}"},
+             status=status.HTTP_500_INTERNAL_SERVER_ERROR
+         )
+    
+@api_view(["GET"])
+def cargar_pieza(request):
+    pieza = request.query_params.get("pieza")
 
-    Tip.objects.create(nombre = nombre, descripcion=descripcion)
+    modelos = {
+        "fusion": FusionWheel,
+        "clear": ClearWheel,
+        "track": SpinTrack,
+        "tip": Tip,
+        "tipe": Tipe
+    }
 
-    return Response(
-        {"success": "Se ha creado la punta de rendimiento exitosamente"},
-        status=status.HTTP_201_CREATED
-    )
+    data = []
 
-@api_view(["POST"])
-def crear_tipe(request):
-    data = json.loads(request.body)
-    nombre = data.get("nombre")
-    descripcion = data.get("descripcion")
+    if pieza in modelos:
+        objetos = modelos[pieza].objects.all()
 
-    Tipe.objects.create(nombre = nombre, descripcion=descripcion)
+        for obj in objetos:
+            data.append({
+                "id": obj.id,
+                "nombre": obj.nombre,
+                "descripcion": obj.descripcion
+            })
+    else:
+        for modelo in modelos.values():
+            objetos = modelo.objects.all()
 
-    return Response(
-        {"success": "Se ha creado el tipo exitosamente"},
-        status=status.HTTP_201_CREATED
-    )
+            for obj in objetos:
+                data.append({
+                    "id": obj.id,
+                    "nombre": obj.nombre,
+                    "descripcion": obj.descripcion
+                })
+
+    return Response(data)
+
+
+
+
 
 @api_view(["GET"])
 def cargar_fusion(request):

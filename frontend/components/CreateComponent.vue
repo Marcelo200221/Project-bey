@@ -28,11 +28,14 @@
     const cargarOpciones = async() => {
         try{
             if(props.eleccion == "bey"){
+                const all = await api.get("cargar/pieza")
                 const fus = await api.get("cargar/fusion")
                 const cle = await api.get("cargar/clear")
                 const tra = await api.get("cargar/track")
                 const pun = await api.get("cargar/tip")
                 const tipo = await api.get("cargar/tipe")
+
+                console.log(all.data)
 
                 fusionWheels.value = fus.data
                 clearWheels.value = cle.data
@@ -41,6 +44,7 @@
                 tipes.value = tipo.data
             }
             console.log(fusion_wheel.value)
+            
         } catch(error){
             console.error(error)
         }

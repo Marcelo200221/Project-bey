@@ -3,11 +3,8 @@ from .views import *
 
 urlpatterns = [
     path('crear/beyblade', crear_beyblade, name = "crear_beyblade"),
-    path('crear/fusion', crear_fusion, name = "crear_fusion"),
-    path('crear/clear', crear_clear, name = "crear_clear"),
-    path('crear/track', crear_track, name = "crear_track"),
-    path('crear/tip', crear_tip, name = "crear_tip"),
-    path('crear/tipe', crear_tipe, name = "crear_tipe"),
+    path('crear/pieza', crear_pieza, name = "crear_pieza"),
+    path('cargar/pieza', cargar_pieza, name = "cargar_pieza"),
     path('cargar/fusion', cargar_fusion, name = "cargar_fusion"),
     path('cargar/clear', cargar_clear, name = "cargar_clear"),
     path('cargar/track', cargar_track, name = "cargar_track"),

@@ -9,13 +9,12 @@
 
     const route = useRoute()
 
-    const season = computed(() => route.params.season)
+    const seleccion = computed(() => route.params.season)
 
     const beyblades = ref([])
 
     const busqueda = ref("")
 
-    const seleccion = ref("")
 
     const user = localStorage.getItem('user')
     const token = localStorage.getItem('auth_token')
@@ -64,13 +63,16 @@
                 seleccion.value = ""
                 beyblades.value = []
             }
-        }
+        },
+        {inmediate: true}
     )
 
     onMounted(() => {
         if(route.params.season){
             seleccion.value = route.params.season
             cargarBeys({value: route.params.season})
+        } else if(route.params.season === "Home"){
+            seleccion.value = "Main"
         }
     })
 </script>
@@ -80,7 +82,7 @@
 
 
         <div v-if="user && token">
-            <div v-if="!season" class="flex flex-col justify-center items-center min-h-screen gap-6">
+            <div v-if="!seleccion" class="flex flex-col justify-center items-center min-h-screen gap-6">
 
                 <div class="border-2 border-black bg-white text-black font-bold text-[24px] px-6 py-2 rounded-lg">
                     <h1>Selecciona una temporada</h1>
@@ -88,21 +90,25 @@
 
                 <div class="flex gap-4">
                     <router-link :to="{name: 'Home', params:{season: 'Fusion'}}">
-                        <div @click="cargarBeys({value: 'Metal Fusion'})"
+                        <div
                             class="flex justify-center border-2 border-black w-fit h-[200px] rounded-lg hover:scale-110 transition-all duration-200">
                             <img class="w-[400px] h-auto rounded-lg" src="/img/Beyblade Metal Fusion.webp" alt="">
                         </div>
                     </router-link>
 
-                    <div @click="cargarBeys({value: 'Metal Masters'})"
-                        class="flex justify-center border-2 border-black w-fit h-[200px] rounded-lg hover:scale-110 transition-all duration-200">
-                        <img class="w-[400px] h-auto rounded-lg" src="/img/Beyblade Metal Masters.webp" alt="">
-                    </div>
+                    <router-link :to="{name: 'Home', params:{season: 'Masters'}}">
+                        <div
+                            class="flex justify-center border-2 border-black w-fit h-[200px] rounded-lg hover:scale-110 transition-all duration-200">
+                            <img class="w-[400px] h-auto rounded-lg" src="/img/Beyblade Metal Masters.webp" alt="">
+                        </div>
+                    </router-link>
 
-                    <div @click="cargarBeys({value: 'Metal Fury'})"
-                        class="flex justify-center border-2 border-black w-fit h-[200px] rounded-lg hover:scale-110 transition-all duration-200">
-                        <img class="w-[400px] h-auto rounded-lg" src="/img/Beyblade Metal Fury.png" alt="">
-                    </div>
+                    <router-link :to="{name: 'Home', params:{season: 'Fury'}}">
+                        <div
+                            class="flex justify-center border-2 border-black w-fit h-[200px] rounded-lg hover:scale-110 transition-all duration-200">
+                            <img class="w-[400px] h-auto rounded-lg" src="/img/Beyblade Metal Fury.png" alt="">
+                        </div>
+                    </router-link>
                 </div>
 
 
@@ -113,12 +119,12 @@
                 </div>
 
             </div>
-            <div v-if="season">
+            <div v-if="seleccion">
                 <div>
                     <div class="flex justify-center p-6">
                         <div class="flex justify-center gap-2 bg-white w-fit rounded-lg">
                             <h1 class="font-bold text-[24px]">{{ seleccion }}</h1>
-                            <button @click="cargarBeys()" class="ml-4 bg-red-500 text-white px-2 rounded">X</button>
+                            <button @click="$router.push({name: 'Home'})" class="ml-4 bg-red-500 text-white px-2 rounded">X</button>
                         </div>
                     </div>
                     <div class="flex justify-center gap-4">
@@ -142,7 +148,7 @@
                     </div>
                 </div>
             </div>
-            <div v-if="season" class="flex justify-center p-6">
+            <div v-if="seleccion === 'Main'" class="flex justify-center p-6">
                 <div class="flex flex-col items-center justify-center gap-4 px-4 py-2 border rounded-lg bg-white w-fit">
                     <h1>¡NO HAY BEYBLADES CREADOS!</h1>
                     <p>Añade beyblades ahora</p>

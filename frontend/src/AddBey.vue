@@ -46,23 +46,23 @@
                 switch(data.tipo){
                     case 'fusion':
                         console.log('Enviando JSON para fusion:', data);
-                        response = await api.post("crear/fusion", data)
+                        response = await api.post("crear/pieza", data)
                         break
                     case 'clear':
                         console.log('Enviando JSON para clear:', data);
-                        response = await api.post("crear/clear", data)
+                        response = await api.post("crear/pieza", data)
                         break
                     case 'track':
                         console.log('Enviando JSON para track:', data);
-                        response = await api.post("crear/track", data)
+                        response = await api.post("crear/pieza", data)
                         break
                     case 'tip':
                         console.log('Enviando JSON para tip:', data);
-                        response = await api.post("crear/tip", data)
+                        response = await api.post("crear/pieza", data)
                         break
                     case 'tipe':
                         console.log('Enviando JSON para tipe:', data);
-                        response = await api.post("crear/tipe", data)
+                        response = await api.post("crear/pieza", data)
                         break
                 }
             }
