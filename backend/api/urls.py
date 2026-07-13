@@ -20,5 +20,5 @@ urlpatterns = [
     path('crear/mensaje', crear_mensaje, name = "crear_mensaje"),
     path('eliminar/chat/<int:pk>', eliminar_chat, name = "eliminar_chat"),
     path('buscador', buscador, name = "buscador"),
-    path('beybot/chat', beybots_chat, name = "beybot_chat")
+    #path('beybot/chat', beybots_chat, name = "beybot_chat")
 ]
