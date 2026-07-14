@@ -11,7 +11,7 @@ import './style.css'
 const app = createApp(App)
 
 const api = axios.create({
-    baseURL: "http://0.0.0.0:8000/api",
+    baseURL: "https://project-bey-production.up.railway.app/api",
     headers: {
         "Content-Type": "application/json",
     },
