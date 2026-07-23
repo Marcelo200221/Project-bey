@@ -280,6 +280,59 @@ html.dark select option {
   }
 }
 
+/* ==========================================================================
+   LOW-POWER MODE (AHORRO DE RECURSOS)
+   ========================================================================== */
+
+html.low-power .aurora-mesh,
+html.low-power .glass-panel,
+html.low-power .glass-orb {
+  display: none !important;
+  animation: none !important;
+}
+
+html.low-power .glass-background-wrapper {
+  background: #f1f5f9 !important;
+}
+
+html.dark.low-power .glass-background-wrapper {
+  background: #0f172a !important;
+}
+
+html.low-power .glass-card {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  animation: none !important;
+}
+
+html.dark.low-power .glass-card {
+  background: #1e293b !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #334155 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  animation: none !important;
+}
+
+html.low-power header,
+html.low-power .header {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: #e63946 !important;
+}
+
+html.low-power *,
+html.low-power *::before,
+html.low-power *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition-duration: 0.1s !important;
+}
+
+
 
 
 

@@ -202,12 +202,15 @@ onMounted(() => {
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-1">Spin Track</label>
+                        <label class="block text-xs font-bold text-slate-300 mb-1">
+                            Spin Track <span class="text-slate-400 font-normal">(Opcional / Sistema 4D)</span>
+                        </label>
                         <select v-model="track" class="w-full px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white focus:border-amber-500 focus:outline-none">
-                            <option value="">Seleccionar Eje de Rotación</option>
+                            <option value="">Sin Spin Track / Fusión 4D (Opcional)</option>
                             <option v-for="t in tracks" :key="t.id" :value="t.id">{{ t.nombre }}</option>
                         </select>
                     </div>
+
 
                     <div>
                         <label class="block text-xs font-bold text-slate-300 mb-1">Tip</label>

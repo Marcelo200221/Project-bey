@@ -83,7 +83,7 @@
                 formData.append('descripcion', descripcion.value);
                 formData.append('fusion', fusion_wheel.value);
                 formData.append('clear', clear_wheel.value);
-                formData.append('track', track.value);
+                if (track.value) formData.append('track', track.value);
                 formData.append('tip', tip.value);
                 formData.append('tipe', tipe.value);
                 formData.append('color', color.value)
@@ -161,7 +161,7 @@
 
             <div v-if="eleccion === 'bey'" class="w-full space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre</label>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Nombre *</label>
                     <input placeholder="Agrega el nombre del beyblade" class="w-full bg-white/90 border border-slate-300 text-slate-900 px-3 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 shadow-inner" type="text" v-model="nombre" required>
                 </div>
 
@@ -172,28 +172,31 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Fusion Wheel</label>
-                        <select class="w-full bg-white/90 border border-slate-300 text-slate-900 px-3 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 shadow-inner" v-model="fusion_wheel">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Fusion Wheel *</label>
+                        <select class="w-full bg-white/90 border border-slate-300 text-slate-900 px-3 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 shadow-inner" v-model="fusion_wheel" required>
                             <option disabled value="">Seleccionar Rueda de fusión</option>
                             <option v-for="f in fusionWheels" :key="f.id" :value="f.id">{{ f.nombre }}</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Clear Wheel</label>
-                        <select class="w-full bg-white/90 border border-slate-300 text-slate-900 px-3 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 shadow-inner" v-model="clear_wheel">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Clear Wheel *</label>
+                        <select class="w-full bg-white/90 border border-slate-300 text-slate-900 px-3 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 shadow-inner" v-model="clear_wheel" required>
                             <option disabled value="">Seleccionar Aro de energía</option>
                             <option v-for="c in clearWheels" :key="c.id" :value="c.id">{{ c.nombre }}</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">Spin Track</label>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">
+                            Spin Track <span class="text-slate-500 font-normal">(Opcional / Sistema 4D)</span>
+                        </label>
                         <select class="w-full bg-white/90 border border-slate-300 text-slate-900 px-3 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 shadow-inner" v-model="track">
-                            <option disabled value="">Seleccionar Eje de rotación</option>
+                            <option value="">Sin Spin Track / Fusión 4D (Opcional)</option>
                             <option v-for="t in tracks" :key="t.id" :value="t.id">{{ t.nombre }}</option>
                         </select>
                     </div>
+
 
                     <div>
                         <label class="block text-xs font-semibold text-slate-700 mb-1">Tip</label>

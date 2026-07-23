@@ -120,7 +120,7 @@
                 <BaseButton :color="'#FF6B35'" :hover-color="'#E63946'" @click="mostrarModalEditar = true">✏️ Editar Beyblade</BaseButton>
                 <BaseButton :color="'#E63946'" :hover-color="'#C1121F'" @click="abrirModal()">🗑️ Eliminar</BaseButton>
             </template>
-            <BaseButton v-else :color="'#FF6B35'" :hover-color="'#E63946'" @click="mostrarModalSugerir = true">💡 Sugerir Cambio / Beyblade</BaseButton>
+            <BaseButton v-else-if="localUser" :color="'#FF6B35'" :hover-color="'#E63946'" @click="mostrarModalSugerir = true">💡 Sugerir Cambio / Beyblade</BaseButton>
         </div>
     </div>
 

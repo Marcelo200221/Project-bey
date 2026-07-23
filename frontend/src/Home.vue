@@ -94,8 +94,8 @@ onMounted(() => {
 <template>
     <Header></Header>
 
-    <!-- Main Container for Logged-In Users -->
-    <div v-if="user && token" class="min-h-[calc(100vh-64px)] p-6 max-w-7xl mx-auto flex flex-col items-center">
+    <!-- Main Container for All Users (Guests & Logged In) -->
+    <div class="min-h-[calc(100vh-64px)] p-6 max-w-7xl mx-auto flex flex-col items-center">
         
         <!-- 1. WELCOME HUB (Default Home State) -->
         <div v-if="!seleccion && !mostrandoSelectorTemporada" class="w-full space-y-10 py-6 max-w-5xl">
@@ -206,94 +206,119 @@ onMounted(() => {
             </div>
         </div>
 
-        <!-- 2. SEASON SELECTOR STATE -->
-        <div v-else-if="mostrandoSelectorTemporada && !seleccion" class="w-full flex flex-col justify-center items-center py-6 gap-8 max-w-5xl">
-            <!-- Selector Header -->
-            <div class="glass-card text-center px-8 py-5 rounded-2xl w-full max-w-3xl flex items-center justify-between gap-4">
-                <div class="text-left">
-                    <h1 class="font-extrabold text-2xl text-slate-900 dark:text-slate-100">🌀 Selecciona una Temporada</h1>
-                    <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Elige una saga para explorar sus Beyblades correspondientes.</p>
+        <!-- 2. SEASON SELECTOR (Sagas) -->
+        <div v-else-if="mostrandoSelectorTemporada && !seleccion" class="w-full space-y-8 py-6 max-w-5xl">
+            <!-- Header Section -->
+            <div class="glass-card flex flex-col sm:flex-row items-center justify-between gap-4 p-6 sm:p-8 rounded-3xl shadow-xl border border-white/30 dark:border-slate-700">
+                <div class="text-center sm:text-left space-y-1">
+                    <h1 class="text-3xl font-extrabold text-slate-900 dark:text-slate-100">Catálogo por Temporada</h1>
+                    <p class="text-xs text-slate-600 dark:text-slate-300">Selecciona una saga para explorar todos los Beyblades de esa generación.</p>
                 </div>
                 <button 
                     type="button" 
                     @click="volverABienvenida"
-                    class="px-3 py-1.5 bg-slate-500/15 hover:bg-slate-500/30 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer"
+                    class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-md flex-shrink-0"
                 >
-                    <span>←</span> Bienvenida
+                    <span>←</span> Volver al Hub
                 </button>
             </div>
 
-            <!-- Season Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl px-4">
-                <router-link :to="{name: 'Home', params:{season: 'Fusion'}}" class="group no-underline">
-                    <div class="glass-card rounded-3xl p-3 group-hover:border-amber-500 group-hover:scale-105 transition-all duration-300 overflow-hidden space-y-3 border border-white/30 dark:border-slate-700 shadow-xl">
-                        <img class="w-full h-48 object-cover rounded-2xl shadow-sm" :src="'/img/Beyblade_metal_fusion.webp'" alt="Metal Fusion">
-                        <div class="text-center pb-2">
-                            <h3 class="font-extrabold text-lg text-slate-900 dark:text-slate-100 group-hover:text-amber-500 transition-colors">Metal Fusion</h3>
-                            <span class="text-xs text-amber-600 dark:text-amber-400 font-semibold">Temporada 1</span>
-                        </div>
+            <!-- Seasons Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                <!-- Metal Fusion -->
+                <router-link 
+                    :to="{ name: 'Home', params: { season: 'Fusion' } }"
+                    class="glass-card group p-6 rounded-3xl flex flex-col justify-between items-center text-center gap-6 hover:border-amber-500 transition-all duration-300 hover:-translate-y-2 no-underline shadow-xl border border-white/30 dark:border-slate-700"
+                >
+                    <div class="w-20 h-20 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform shadow-inner">
+                        🔥
                     </div>
+                    <div class="space-y-2">
+                        <h2 class="text-2xl font-black text-slate-900 dark:text-slate-100 group-hover:text-amber-500 transition-colors">Metal Fusion</h2>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                            La saga inicial. Explora los primeros Beyblades de la generación Metal Fight.
+                        </p>
+                    </div>
+                    <span class="w-full py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-extrabold text-xs rounded-xl shadow-md group-hover:shadow-lg transition-all">
+                        Ver Beyblades Fusion →
+                    </span>
                 </router-link>
 
-                <router-link :to="{name: 'Home', params:{season: 'Masters'}}" class="group no-underline">
-                    <div class="glass-card rounded-3xl p-3 group-hover:border-amber-500 group-hover:scale-105 transition-all duration-300 overflow-hidden space-y-3 border border-white/30 dark:border-slate-700 shadow-xl">
-                        <img class="w-full h-48 object-cover rounded-2xl shadow-sm" :src="'/img/Beyblade_metal_masters.webp'" alt="Metal Masters">
-                        <div class="text-center pb-2">
-                            <h3 class="font-extrabold text-lg text-slate-900 dark:text-slate-100 group-hover:text-amber-500 transition-colors">Metal Masters</h3>
-                            <span class="text-xs text-amber-600 dark:text-amber-400 font-semibold">Temporada 2</span>
-                        </div>
+                <!-- Metal Masters -->
+                <router-link 
+                    :to="{ name: 'Home', params: { season: 'Masters' } }"
+                    class="glass-card group p-6 rounded-3xl flex flex-col justify-between items-center text-center gap-6 hover:border-orange-500 transition-all duration-300 hover:-translate-y-2 no-underline shadow-xl border border-white/30 dark:border-slate-700"
+                >
+                    <div class="w-20 h-20 rounded-2xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform shadow-inner">
+                        ⚡
                     </div>
+                    <div class="space-y-2">
+                        <h2 class="text-2xl font-black text-slate-900 dark:text-slate-100 group-hover:text-orange-500 transition-colors">Metal Masters</h2>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Campeonato mundial Big Bang Bladers. Beyblades de máxima competición internacional.
+                        </p>
+                    </div>
+                    <span class="w-full py-2.5 bg-gradient-to-r from-orange-500 to-red-500 text-white font-extrabold text-xs rounded-xl shadow-md group-hover:shadow-lg transition-all">
+                        Ver Beyblades Masters →
+                    </span>
                 </router-link>
 
-                <router-link :to="{name: 'Home', params:{season: 'Fury'}}" class="group no-underline">
-                    <div class="glass-card rounded-3xl p-3 group-hover:border-amber-500 group-hover:scale-105 transition-all duration-300 overflow-hidden space-y-3 border border-white/30 dark:border-slate-700 shadow-xl">
-                        <img class="w-full h-48 object-cover rounded-2xl shadow-sm" :src="'/img/Beyblade_Metal_Fury.png'" alt="Metal Fury">
-                        <div class="text-center pb-2">
-                            <h3 class="font-extrabold text-lg text-slate-900 dark:text-slate-100 group-hover:text-amber-500 transition-colors">Metal Fury</h3>
-                            <span class="text-xs text-amber-600 dark:text-amber-400 font-semibold">Temporada 3</span>
-                        </div>
+                <!-- Metal Fury -->
+                <router-link 
+                    :to="{ name: 'Home', params: { season: 'Fury' } }"
+                    class="glass-card group p-6 rounded-3xl flex flex-col justify-between items-center text-center gap-6 hover:border-red-500 transition-all duration-300 hover:-translate-y-2 no-underline shadow-xl border border-white/30 dark:border-slate-700"
+                >
+                    <div class="w-20 h-20 rounded-2xl bg-red-500/20 border border-red-500/40 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform shadow-inner">
+                        🌟
                     </div>
+                    <div class="space-y-2">
+                        <h2 class="text-2xl font-black text-slate-900 dark:text-slate-100 group-hover:text-red-500 transition-colors">Metal Fury</h2>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Los Bladers Solar y el fragmento de estrella. El sistema 4D definitivo.
+                        </p>
+                    </div>
+                    <span class="w-full py-2.5 bg-gradient-to-r from-red-500 to-amber-500 text-white font-extrabold text-xs rounded-xl shadow-md group-hover:shadow-lg transition-all">
+                        Ver Beyblades Fury →
+                    </span>
                 </router-link>
             </div>
 
-            <div class="flex justify-center mt-2">
-                <div class="glass-card px-6 py-2.5 rounded-2xl">
-                    <p class="text-xs font-semibold text-orange-600 dark:text-amber-400 text-center">✨ Próximamente más temporadas y sagas especiales</p>
-                </div>
-            </div>
         </div>
 
-        <!-- 3. BEYBLADES GRID FOR SELECTED SEASON -->
-        <div v-if="seleccion" class="w-full max-w-7xl space-y-6">
-            <!-- Season Header & Search Bar -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 glass-card p-6 rounded-3xl shadow-xl">
+        <!-- 3. BEYBLADES LISTING (Specific Season Selected) -->
+        <div v-else class="w-full space-y-6">
+            
+            <!-- Controls Bar: Search + Back to Seasons -->
+            <div class="glass-card flex flex-col md:flex-row items-center justify-between gap-4 p-4 sm:p-6 rounded-3xl shadow-xl border border-white/30 dark:border-slate-700">
+                <!-- Title / Season Badge -->
                 <div class="flex items-center gap-3">
                     <span class="text-3xl">🌀</span>
                     <div>
-                        <h1 class="font-extrabold text-2xl text-slate-900 dark:text-slate-100">Temporada: {{ seleccion }}</h1>
-                        <p class="text-xs text-slate-600 dark:text-slate-300">Explora los Beyblades pertenecientes a la saga {{ seleccion }}.</p>
+                        <h1 class="text-2xl font-extrabold text-slate-900 dark:text-slate-100 capitalize">
+                            {{ seleccion ? `Temporada: Metal ${seleccion.replace('-', ' ')}` : 'Catálogo Beyblades' }}
+                        </h1>
+                        <p class="text-xs text-slate-600 dark:text-slate-300">Explora todos los modelos y especificaciones de esta temporada.</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-3 w-full sm:w-auto">
-                    <form @submit.prevent="buscar" class="flex items-center gap-2 flex-1 sm:flex-initial">
+                <!-- Search Input & Navigation Buttons -->
+                <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+                    <div class="relative w-full sm:w-64">
                         <input 
                             type="text" 
-                            v-model="busqueda" 
-                            placeholder="Buscar Beyblade..." 
-                            class="w-full sm:w-64 px-4 py-2 bg-white/90 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-xl focus:outline-none focus:border-amber-500 transition-colors shadow-inner text-xs"
+                            v-model="busqueda"
+                            @input="buscar"
+                            placeholder="🔍 Buscar Beyblade..."
+                            class="w-full px-4 py-2.5 bg-slate-900/80 border border-slate-700/80 rounded-2xl text-xs text-white placeholder-slate-400 focus:border-amber-500 focus:outline-none transition-colors shadow-inner"
                         >
-                        <button class="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-bold rounded-xl px-4 py-2 text-xs transition-all shadow-md cursor-pointer">
-                            Buscar
-                        </button>
-                    </form>
+                    </div>
 
                     <button 
-                        @click="irATemporadas" 
-                        class="bg-slate-500/15 hover:bg-slate-500/30 text-slate-700 dark:text-slate-300 px-3 py-2 rounded-xl text-xs font-bold transition-colors shadow-sm cursor-pointer flex items-center gap-1 flex-shrink-0"
-                        title="Cambiar temporada"
+                        type="button" 
+                        @click="irATemporadas"
+                        class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-2xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md flex-shrink-0"
                     >
-                        <span>↺</span> Temporadas
+                        <span>🔄</span> Cambiar Temporada
                     </button>
                 </div>
             </div>
@@ -323,28 +348,6 @@ onMounted(() => {
                 <span class="text-4xl">🌀</span>
                 <h2 class="font-extrabold text-xl text-slate-900 dark:text-slate-100">No hay Beyblades en esta temporada</h2>
                 <p class="text-xs text-slate-600 dark:text-slate-300">No se encontraron Beyblades registrados para {{ seleccion }}.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Guest Unauthenticated Landing -->
-    <div v-else class="relative min-h-[calc(100vh-64px)] flex items-center justify-center p-6">
-        <div class="glass-card relative flex flex-col items-center text-center max-w-md p-8 rounded-3xl gap-5 shadow-2xl border border-white/30 dark:border-slate-700">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-3xl shadow-lg">
-                ⚡
-            </div>
-            <div>
-                <h1 class="font-black text-slate-900 dark:text-slate-100 text-2xl mb-1">Inicia sesión en BeyStory</h1>
-                <p class="text-xs text-slate-600 dark:text-slate-300">Conéctate con otros Bladers y explora todo el universo Beyblade.</p>
-            </div>
-            <router-link to="/iniciar" class="w-full">
-                <BaseButton color="#FF6B35" hoverColor="#E63946">Iniciar Sesión</BaseButton>
-            </router-link>
-            <div class="text-xs text-slate-600 dark:text-slate-400">
-                <p>
-                    ¿No estás registrado? 
-                    <router-link to="/registro" class="text-orange-600 dark:text-amber-400 hover:text-red-600 dark:hover:text-amber-300 font-semibold underline ml-1">Regístrate aquí</router-link>
-                </p>
             </div>
         </div>
     </div>

@@ -73,8 +73,8 @@ def crear_beyblade(request):
         else:
             image = None
 
-    # Validate required fields
-    if not all([nombre, descripcion, fusion_wheel, clear_wheel, spin_track, tip, tipe, color, season, sistem]):
+    # Validate required fields (spin_track is optional for 4D system Beyblades)
+    if not all([nombre, descripcion, fusion_wheel, clear_wheel, tip, tipe, color, season, sistem]):
         return Response(
             {"error": "Faltan campos requeridos"},
             status=status.HTTP_400_BAD_REQUEST
@@ -83,7 +83,7 @@ def crear_beyblade(request):
     try:
         fusion = FusionWheel.objects.get(id=fusion_wheel)
         clear = ClearWheel.objects.get(id=clear_wheel)
-        track = SpinTrack.objects.get(id=spin_track)
+        track = SpinTrack.objects.get(id=spin_track) if spin_track else None
         tipBey = Tip.objects.get(id=tip)
         tipeBey = Tipe.objects.get(id=tipe)
 
@@ -111,6 +111,7 @@ def crear_beyblade(request):
             {"error": "Uno o más componentes no existen"},
             status=status.HTTP_404_NOT_FOUND
         )
+
     except Exception as e:
         return Response(
             {"error": f"Error al crear beyblade: {str(e)}"},

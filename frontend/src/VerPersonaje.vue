@@ -121,7 +121,7 @@ onMounted(() => {
                         </button>
                     </template>
                     <button 
-                        v-else
+                        v-else-if="localUser"
                         type="button" 
                         @click="mostrarModalSugerir = true" 
                         class="px-3.5 py-1.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-xl text-xs font-extrabold shadow-md transition-all flex items-center gap-1 cursor-pointer"

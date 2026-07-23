@@ -187,8 +187,13 @@ const logout = () => {
 };
 
 onMounted(() => {
+    if (!localUser) {
+        router.push('/iniciar');
+        return;
+    }
     cargarPerfil();
 });
+
 </script>
 
 <template>

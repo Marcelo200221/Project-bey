@@ -79,7 +79,7 @@ onMounted(() => {
                     <span>➕</span> Crear Personaje
                 </router-link>
                 <button 
-                    v-else
+                    v-else-if="localUser"
                     @click="mostrarModalSugerir = true"
                     class="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-xl text-xs font-extrabold shadow-lg transition-all hover:scale-105 flex items-center gap-1.5 flex-shrink-0 cursor-pointer"
                 >
@@ -109,7 +109,7 @@ onMounted(() => {
                 <span>➕</span> Crear Personaje
             </router-link>
             <button 
-                v-else
+                v-else-if="localUser"
                 @click="mostrarModalSugerir = true" 
                 class="px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white rounded-2xl text-sm font-extrabold shadow-xl transition-all hover:scale-105 flex items-center justify-center gap-2 cursor-pointer"
             >

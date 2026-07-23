@@ -43,9 +43,10 @@ class Beyblade(models.Model):
     descripcion = models.TextField(default="",blank=False)
     fusion_wheel = models.ForeignKey(FusionWheel, on_delete=models.CASCADE, related_name="beyblade")
     clear_wheel = models.ForeignKey(ClearWheel, on_delete=models.CASCADE, related_name="beyblade")
-    spin_track = models.ForeignKey(SpinTrack, on_delete=models.CASCADE, related_name="beyblade")
+    spin_track = models.ForeignKey(SpinTrack, on_delete=models.CASCADE, related_name="beyblade", null=True, blank=True)
     tip = models.ForeignKey(Tip, on_delete=models.CASCADE, related_name="beyblade")
     tipe = models.ForeignKey(Tipe, on_delete=models.CASCADE, related_name="beyblade")
+
     color = models.CharField(default="", max_length=100, null=False)
     photo = models.ImageField(upload_to="media/", blank=True, null=True)
     sistem = models.CharField(default="", max_length=200, null=False)
