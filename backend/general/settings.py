@@ -40,7 +40,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
-    'project-bey-production.up.railway.app'
+    'project-bey-production.up.railway.app',
     "localhost",
 ]
 
@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'api',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount'
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
